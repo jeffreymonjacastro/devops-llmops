@@ -1,0 +1,7 @@
+# El juez tiene dueño: estos archivos solo cambian con la aprobación de esa persona.
+# Reemplaza @tu-usuario por tu usuario de GitHub.
+/gate/                  @jeffreymonjacastro
+/data/golden.jsonl      @jeffreymonjacastro
+/src/evaluate.py        @jeffreymonjacastro
+/src/gate.py            @jeffreymonjacastro
+/.github/               @jeffreymonjacastro
