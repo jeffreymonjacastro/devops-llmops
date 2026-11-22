@@ -9,8 +9,17 @@ import os
 import re
 import sys
 import time
+from pathlib import Path
 
 import requests
+
+# Carga automática de .env si existe
+_env_file = Path(__file__).resolve().parents[1] / ".env"
+if _env_file.exists():
+    for line in _env_file.read_text(encoding="utf-8").splitlines():
+        if "=" in line and not line.strip().startswith("#"):
+            k, v = line.strip().split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 BASE_URL = os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1").rstrip("/")
 MODEL = os.getenv("LLM_MODEL", "qwen/qwen3.8-27b")
