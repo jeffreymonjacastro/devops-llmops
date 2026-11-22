@@ -5,6 +5,15 @@ siguen corriendo sin red.
 """
 import os
 from contextlib import contextmanager
+from pathlib import Path
+
+# Carga automática de .env si existe
+_env_file = Path(__file__).resolve().parents[1] / ".env"
+if _env_file.exists():
+    for line in _env_file.read_text(encoding="utf-8").splitlines():
+        if "=" in line and not line.strip().startswith("#"):
+            k, v = line.strip().split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 ENABLED = bool(os.getenv("LANGFUSE_PUBLIC_KEY") and os.getenv("LANGFUSE_SECRET_KEY"))
 ESCENARIO = os.getenv("ESCENARIO", "dev")  # replay.py lo cambia por el nombre de la semana
